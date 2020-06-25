@@ -12,9 +12,14 @@ class Cenario{
     image(imagemCenario, this.x2,0, width, height);
   }
   
-  move(){
-    this.x1 = this.x1 - this.velocidade;
-    this.x2 = this.x2 - this.velocidade;
+  move(){ 
+    if(dash){
+      this.x1 = this.x1 - this.velocidade - 20;
+      this.x2 = this.x2 - this.velocidade - 20;
+    }else{
+      this.x1 = this.x1 - this.velocidade;
+      this.x2 = this.x2 - this.velocidade;
+    }
 
     if(this.x1 < -width){
       this.x1 = width;
