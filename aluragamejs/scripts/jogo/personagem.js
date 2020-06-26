@@ -16,6 +16,7 @@ class Personagem extends Animacao {
     if(this.pulos < 2) {
       this.velocidadeDoPulo = this.alturaDoPulo;
       this.pulos++;
+      somDoPulo.play();
     }
   }
 
@@ -35,7 +36,7 @@ class Personagem extends Animacao {
     //rect(this.x + 5, this.y + 5, this.largura * 0.7, this.altura - 15);
     //rect(inimigo.x +15, inimigo.y + 10, inimigo.largura * 0.8, inimigo.altura *0.7);
     
-    const precisao = 0.7;
+    // const precisao = 0.7;
     const colisao = collideRectRect(
       this.x + 5,
       this.y, 
@@ -45,6 +46,28 @@ class Personagem extends Animacao {
       inimigo.y + 10, 
       inimigo.largura * 0.8, 
       inimigo.altura * 0.7
+    );
+
+    return colisao;
+
+  }
+
+  estaColidindoGema(gema) {
+    const precisao = 0.7;
+
+    // noFill();
+    // rect(this.x + 5, this.y + 5, this.largura * precisao, this.altura - 15);
+    // rect(gema.x, gema.y, gema.largura, gema.altura);
+    
+    const colisao = collideRectRect(
+      this.x + 5,
+      this.y, 
+      this.largura * precisao, 
+      this.altura - 10,
+      gema.x, 
+      gema.y, 
+      gema.largura, 
+      gema.altura
     );
 
     return colisao;

@@ -1,8 +1,9 @@
-class Inimigo extends Animacao{
-  constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, velocidadeMin, velocidadeMax, delayMin, delayMax)  {
+class Gema extends Animacao{
+  constructor(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite, velocidade, delayMin, delayMax, tipo)  {
    super(matriz, imagem, x, variacaoY, largura, altura, larguraSprite, alturaSprite); 
     
-    this.velocidade = aleatorio(velocidadeMin, velocidadeMax);
+    this.velocidade = velocidade;
+    this.tipo = tipo;
     
     this.delay = aleatorio(delayMin, delayMax);
     this.x = width + this.delay;
@@ -17,9 +18,6 @@ class Inimigo extends Animacao{
     
     if(this.x < -this.largura - this.delay){
       this.x = width; 
-      pontos = pontos + 10;
-      this.velocidade = this.velocidade + (pontos / 100);
-
     }
   }
 }
