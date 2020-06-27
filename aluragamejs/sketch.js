@@ -13,7 +13,7 @@ function setup() {
   botaoGerenciador = new BotaoGerenciador('Iniciar', width/2, height/2);
 
   frameRate(40);
-  somDoJogo.loop();
+  //somDoJogo.loop();
 }
 
 function keyPressed() {

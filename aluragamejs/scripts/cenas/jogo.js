@@ -6,9 +6,12 @@ class Jogo {
         createCanvas(windowWidth, windowHeight);
         cenario = new Cenario(imagemCenario, 3);
         pontuacao = new Pontuacao();
-
+        vida = new Vida();
+        mana = new Mana();
         personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270);
-
+        personagemTecnica01 = new Personagem(matrizTecnica01, imagemAplicandoTecnica01, 0, 30, 220, 270, 480, 540);
+        tecnica01 = new Tecnica(imagemGemas, width, aleatorio(150, 400), 40, 40, 80, 80,
+            3, 300, 500);
         jogo.startGame();
     }
 
@@ -38,6 +41,8 @@ class Jogo {
         gemaVermelha = new Gema(matrizGemaVermelha, imagemGemas, width, aleatorio(250, 500), 40, 40, 80, 80,
             3, 2500, 4500, "vermelha");
 
+        tecnica01 = new Tecnica(imagemtecnica01, 100, 100, 15);
+
         gemas.push(gemaVerde);
         gemas.push(gemaAzul);
         gemas.push(gemaVermelha);
@@ -62,7 +67,13 @@ class Jogo {
     keyPressedKeyCode(keyCode) {
         console.log('keyPressedKeyCode:', keyCode);
         if (keyCode == 32) {
-            // power();
+            // if (mana.atuais > 0) {
+                 mana.pedeMana();
+            //     tecnica01.ataque(personagem.x, personagem.y);
+            //     let personagemPadrao = personagem;
+            //     personagem = personagemTecnica01;
+            //     personagem; personagemPadrao;
+            // }
         }
 
         if (keyCode == 13) {
@@ -87,6 +98,9 @@ class Jogo {
         cenario.exibe();
         cenario.move();
 
+        vida.draw();
+        mana.draw();
+
         pontuacao.exibe();
         pontuacao.adicionarPonto();
 
@@ -99,7 +113,12 @@ class Jogo {
 
             if (personagem.estaColidindo(inimigo)) {
                 console.log('dano');
-                gameOver = true;
+                vida.pedeVida();
+                personagem.tornarInvencivel();
+                if (vida.atuais <= 0) {
+                    gameOver = true;
+                    console.log('gameOver');
+                }
             }
         });
 
@@ -120,10 +139,10 @@ class Jogo {
                         console.log('pontos d', pontos);
                         break;
                     case "azul":
-
+                        mana.ganhaMana();
                         break;
                     case "vermelha":
-
+                        vida.ganhaVida();
                         break;
 
                     default:

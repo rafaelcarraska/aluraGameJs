@@ -10,6 +10,7 @@ class Personagem extends Animacao {
     this.gravidade = 5;
     this.alturaDoPulo = - 55;
     this.pulos = 0;
+    this.invencivel = false;
   }
 
   pula() {
@@ -32,6 +33,9 @@ class Personagem extends Animacao {
   }
 
   estaColidindo(inimigo) {
+    if (this.invencivel) {
+      return false;
+    }
     //noFill();
     //rect(this.x + 5, this.y + 5, this.largura * 0.7, this.altura - 15);
     //rect(inimigo.x +15, inimigo.y + 10, inimigo.largura * 0.8, inimigo.altura *0.7);
@@ -50,6 +54,13 @@ class Personagem extends Animacao {
 
     return colisao;
 
+  }
+
+  tornarInvencivel(){
+    this.invencivel = true;
+    setTimeout(() => {
+      this.invencivel = false;
+    }, 1000);
   }
 
   estaColidindoGema(gema) {
